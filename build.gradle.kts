@@ -8,20 +8,24 @@ tasks.withType<JavaCompile> {
 }
 
 group = "anvil.fix"
-version = "2.3"
+version = "2.5"
 
-tasks.create<Copy>("copyShadowOutputToLocalServer") {
+val localServerPluginsDir = providers.gradleProperty("localServerPluginsDir")
+
+tasks.register<Copy>("copyJarToLocalServer") {
+    group = "build"
+    description = "Copies the plugin jar to -PlocalServerPluginsDir=<plugins-dir>"
+
     from(tasks.jar)
-    destinationDir = file("C:\\Users\\Kubia\\Desktop\\PAPER SEX\\plugins")
+    if (localServerPluginsDir.isPresent) {
+        into(localServerPluginsDir.get())
+    } else {
+        into(layout.buildDirectory.dir("copyJarToLocalServer-disabled"))
+        doFirst {
+            throw GradleException("Set -PlocalServerPluginsDir=<plugins-dir> to use copyJarToLocalServer.")
+        }
+    }
 }
-
-tasks.build {
-    dependsOn(tasks["copyShadowOutputToLocalServer"])
-}
-
-
-//project.layout.buildDirectory.set(File("C:\\Users\\Kubia\\Desktop\\Server\\plugins"))
-
 
 repositories {
     mavenLocal()
@@ -41,7 +45,6 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
-    compileOnly("org.spigotmc:spigot:1.20.1-R0.1-SNAPSHOT")
     compileOnly("com.github.retrooper:packetevents-spigot:2.11.3-SNAPSHOT")
     //compileOnly("org.spigotmc:spigot:1.20.5-R0.1-SNAPSHOT:remapped-mojang")
 

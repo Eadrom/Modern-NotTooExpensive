@@ -1,5 +1,12 @@
-.gradle
+.gradle/
+.gradle-home/
+gradle.properties
 build/
+*.class
+*.jar
+*.war
+*.nar
+*.ear
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

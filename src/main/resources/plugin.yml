@@ -1,6 +1,7 @@
 main: anvil.fix.Main
-version: 2.3
+version: 2.5
 name: Modern-NotTooExpensive
 api-version: 1.13
 softdepend:
   - packetevents
+  - AuraSkills

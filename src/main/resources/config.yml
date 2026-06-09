@@ -1,0 +1,25 @@
+# When false, Modern-NotTooExpensive keeps its existing behavior and may replace
+# high-cost anvil results.
+#
+# When true, the plugin only fixes the client-side anvil cost display for
+# already-existing anvil results. It will not calculate costs, set results,
+# change repair costs, or bypass another plugin's anvil rules.
+ui-only-mode: false
+
+# Enables verbose console logging for anvil events and packet spoofing.
+# This is intentionally noisy and should only be enabled while troubleshooting.
+debug-output: false
+
+# In UI-only mode, the server may expose a high repair cost but no result item
+# when another plugin blocks the operation. When true, still try to show that
+# cost to the client without creating or allowing a result.
+show-blocked-cost: true
+
+# Sends a throttled chat message when show-blocked-cost observes a blocked
+# anvil operation with a high repair cost. This is more visible than the
+# vanilla anvil UI or actionbar.
+blocked-cost-chat: true
+
+# Optional extra actionbar message for blocked anvil operations. The actionbar
+# is brief, so blocked-cost-chat is usually more useful.
+blocked-cost-actionbar: false
